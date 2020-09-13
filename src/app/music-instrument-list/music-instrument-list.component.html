@@ -1,0 +1,18 @@
+<h2>Avaiable musical instruments on stock</h2>
+<div>
+  <label>Instrument name:
+    <input #instrumentName />
+  </label>
+  <button (click)="add(instrumentName.value); instrumentName.value=''">
+    Add
+  </button>
+</div>
+<ul class="instruments">
+  <li *ngFor="let instrument of instruments">
+    <a routerLink="/detail/{{instrument.id}}">
+      <span class="badge">{{instrument.name}}</span>
+      <span>{{instrument.price | currency}}</span>
+    </a>
+  </li>
+</ul>
+

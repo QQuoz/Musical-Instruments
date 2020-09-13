@@ -1,0 +1,24 @@
+<div *ngIf="instrument">
+  <h2>{{instrument.name | uppercase}} DETAILS</h2>
+  <div>
+    <label class="details">Name:
+      <input class ="input" [(ngModel)]="instrument.name" placeholder="Name"/>
+    </label>
+  </div>
+  <div class="details"><span>Type: </span>{{instrument.type | musicInstrumentTypeTranslator}}</div>
+  <div>
+    <label class="details">Description:
+      <input class ="input" [(ngModel)]="instrument.description" placeholder="Description"/>
+    </label>
+  </div>
+  <div>
+    <label class="details">Price:
+      <input type = "number" min="1" class ="input" [(ngModel)]="instrument.price" placeholder="Price"/>
+    </label>
+  </div>
+  <div>
+  <button (click)="goBack()">Back</button>
+  <button (click)="save()">Save</button>
+  </div>
+</div>
+
