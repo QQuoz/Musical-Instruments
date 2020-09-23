@@ -1,33 +1,44 @@
+import { LoadingService } from './../loading/loading.service';
 import { Component, OnInit } from '@angular/core';
 import { MusicalInstrument } from '../musical-instrument';
 import { InstrumentService } from '../instrument.service';
+import { delay, finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-music-instrument-list',
   templateUrl: './music-instrument-list.component.html',
-  styleUrls: ['./music-instrument-list.component.css']
+  styleUrls: ['./music-instrument-list.component.css'],
 })
 export class MusicInstrumentListComponent implements OnInit {
+  instruments: MusicalInstrument[];
 
-  instruments: MusicalInstrument [];
-
-  constructor(private instrumentService: InstrumentService ) { }
+  constructor(
+    private instrumentService: InstrumentService,
+    private LoadingService: LoadingService
+  ) {}
 
   ngOnInit() {
     this.getInstruments();
   }
 
   getInstruments(): void {
-    this.instrumentService.getInstruments()
-    .subscribe(instruments => this.instruments = instruments);
+    this.LoadingService.loadingOn();
+    this.instrumentService.getInstruments().pipe(
+      delay(1000),
+      finalize(() => this.LoadingService.loadingOff())
+    )
+      .subscribe((instruments) => (this.instruments = instruments));
   }
 
   add(name: string): void {
     name = name.trim();
-    if (!name) { return; }
-    this.instrumentService.addInstrument({ name } as MusicalInstrument)
-    .subscribe(instrument => {
-      this.instruments.push(instrument);
-    });
+    if (!name) {
+      return;
+    }
+    this.instrumentService
+      .addInstrument({ name } as MusicalInstrument)
+      .subscribe((instrument) => {
+        this.instruments.push(instrument);
+      });
   }
 }

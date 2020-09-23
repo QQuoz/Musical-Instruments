@@ -9,19 +9,25 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 import { MusicInstrumentTypeTranslatorPipe } from './music-instrument-type-translator.pipe';
+import { LoadingComponent } from './loading/loading.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
     AppComponent,
     MusicInstrumentListComponent,
     MusicInstrumentDetailsComponent,
-    MusicInstrumentTypeTranslatorPipe
+    MusicInstrumentTypeTranslatorPipe,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    MatProgressSpinnerModule,
 
 HttpClientInMemoryWebApiModule.forRoot(
   InMemoryDataService, { dataEncapsulation: false }
