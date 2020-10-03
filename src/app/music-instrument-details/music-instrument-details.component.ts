@@ -10,17 +10,16 @@ import { delay, finalize } from 'rxjs/operators';
 @Component({
   selector: 'app-music-instrument-details',
   templateUrl: './music-instrument-details.component.html',
-  styleUrls: ['./music-instrument-details.component.css']
+  styleUrls: ['./music-instrument-details.component.css'],
 })
 export class MusicInstrumentDetailsComponent implements OnInit {
-
   instrument: MusicalInstrument;
 
   constructor(
     private route: ActivatedRoute,
     private instrumentService: InstrumentService,
     private location: Location,
-    private LoadingService: LoadingService
+    private loadingService: LoadingService
   ) {}
 
   ngOnInit(): void {
@@ -28,20 +27,23 @@ export class MusicInstrumentDetailsComponent implements OnInit {
   }
 
   getInstrument(): void {
-    this.LoadingService.loadingOn();
+    this.loadingService.loadingOn();
     const id = +this.route.snapshot.paramMap.get('id');
-    this.instrumentService.getInstrument(id).pipe(
-      delay(1000),
-      finalize(() => this.LoadingService.loadingOff())
-    )
-    .subscribe(instrument => this.instrument = instrument);
+    this.instrumentService
+      .getInstrument(id)
+      .pipe(
+        delay(1000),
+        finalize(() => this.loadingService.loadingOff())
+      )
+      .subscribe((instrument) => (this.instrument = instrument));
   }
 
   goBack(): void {
     this.location.back();
   }
   save(): void {
-    this.instrumentService.updateInstrument(this.instrument)
+    this.instrumentService
+      .updateInstrument(this.instrument)
       .subscribe(() => this.goBack());
   }
 }

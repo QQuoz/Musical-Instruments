@@ -14,7 +14,7 @@ export class MusicInstrumentListComponent implements OnInit {
 
   constructor(
     private instrumentService: InstrumentService,
-    private LoadingService: LoadingService
+    private loadingService: LoadingService
   ) {}
 
   ngOnInit() {
@@ -22,11 +22,13 @@ export class MusicInstrumentListComponent implements OnInit {
   }
 
   getInstruments(): void {
-    this.LoadingService.loadingOn();
-    this.instrumentService.getInstruments().pipe(
-      delay(1000),
-      finalize(() => this.LoadingService.loadingOff())
-    )
+    this.loadingService.loadingOn();
+    this.instrumentService
+      .getInstruments()
+      .pipe(
+        delay(1000),
+        finalize(() => this.loadingService.loadingOff())
+      )
       .subscribe((instruments) => (this.instruments = instruments));
   }
 

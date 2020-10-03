@@ -7,11 +7,7 @@ import { Injectable } from '@angular/core';
 export class LoadingService {
   private loadingSubject = new BehaviorSubject<boolean>(false);
 
-  loading$: Observable<boolean> = this.loadingSubject.asObservable();
-
-  showLoaderUnitCompleted<T>(obs$: Observable<T>): Observable<T> {
-    return undefined;
-  }
+  loading$ = this.loadingSubject.asObservable();
 
   loadingOn() {
     this.loadingSubject.next(true);

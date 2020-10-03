@@ -1,27 +1,7 @@
-button {
-  margin: 10px 2px;
-  font-family: Arial;
-  background-color: #adadad;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-  cursor: pointer;
+.clr-row {
+  margin-left: 10px;
 }
-button:hover {
-  color: #039be5;
-  background-color: #cfd8dc;
-}
-button:disabled {
-  background-color: #eee;
-  color: #ccc;
-  cursor: auto;
-}
-.details {
-  line-height: 30px;
-  font-family: Arial;
-  font-weight: 700;
-}
-.input {
-  font-family: Arial;
-  font-weight: 700;
+
+input {
+  font-size: large;
 }

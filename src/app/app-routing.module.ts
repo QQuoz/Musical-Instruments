@@ -6,11 +6,11 @@ import { MusicInstrumentDetailsComponent } from './music-instrument-details/musi
 const routes: Routes = [
   { path: '', redirectTo: '/instruments', pathMatch: 'full' },
   { path: 'detail/:id', component: MusicInstrumentDetailsComponent },
-  { path: 'instruments', component: MusicInstrumentListComponent }
+  { path: 'instruments', component: MusicInstrumentListComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}
